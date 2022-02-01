@@ -1,18 +1,8 @@
 #!/bin/bash
 
-# NOTE: sed -i doesn't work when configs are mount points
-
-# set OTS secret if supplied by ENV or if default
-if [[ -n ${OTS_SECRET+x} ]]; then
-  echo "Setting OTS secret to $OTS_SECRET"
-  cp /etc/onetime/config{,.bak}
-  sed "s/:secret:.*\$/:secret: $OTS_SECRET/" /etc/onetime/config.bak > /etc/onetime/config
-elif grep -q ":secret: CHANGEME" /etc/onetime/config; then
-  PASS="$(dd if=/dev/urandom bs=20 count=1 2>/dev/null| openssl sha1 | grep -o '[a-f0-9]\{40\}')"
-  echo "Generating OTS secret: $PASS"
-  cp /etc/onetime/config{,.bak}
-  sed "s/:secret:.*\$/:secret: $PASS/" /etc/onetime/config.bak > /etc/onetime/config
-fi
+# Substitute environment variables in config
+cp /etc/onetime/config{,.bak}
+envsubst < /etc/onetime/config.bak > /etc/onetime/config
 
 # remove redis password and change to default port
 if grep -q "redis://user:CHANGEME@127.0.0.1:7179" /etc/onetime/config; then

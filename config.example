@@ -1,16 +1,15 @@
 :site:
-  :host: localhost:7143
+  :host: $ONETIMESECRET_HOST
   :domain: localhost
-  :ssl: false
+  :ssl: $ONETIMESECRET_SSL
   # NOTE Once the secret is set, do not change it (keep a backup offsite)
-  :secret: CHANGEME
+  :secret: $ONETIMESECRET_SECRET
 :redis:
-  :uri: 'redis://127.0.0.1:6379/0?timeout=10&thread_safe=false&logging=false'
-  :config: /etc/redis/redis.conf
+  :uri: redis://user:CHANGEME@127.0.0.1:7179/0?timeout=10&thread_safe=false&logging=false
+  :config: /etc/onetime/redis.conf
 :colonels:
   # Accounts created with the following email addresses
   # are automatically considered admins of the system.
-  - CHANGEME@EXAMPLE.com
 :emailer:
   :mode: :sendgrid
   :account: CHANGEME

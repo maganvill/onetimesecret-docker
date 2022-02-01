@@ -9,6 +9,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
   apt-get install -y \
     build-essential \
     redis-server \
+    gettext-base \
   && rm -rf /var/lib/apt/lists/*
 
 # Download and install OTS version 0.10.x
