@@ -14,7 +14,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
 # Download and install OTS version 0.10.x
 RUN set -ex && \
   mkdir -p /etc/onetime /var/log/onetime /var/run/onetime /var/lib/onetime && \
-  wget https://codeload.github.com/onetimesecret/onetimesecret/legacy.tar.gz/0.10 -O /tmp/ots.tar.gz && \
+  wget https://github.com/onetimesecret/onetimesecret/archive/refs/tags/v0.10.1.tar.gz -O /tmp/ots.tar.gz && \
   tar xzf /tmp/ots.tar.gz -C /var/lib/onetime --strip-components=1 && \
   rm /tmp/ots.tar.gz && \
   cd /var/lib/onetime && \
