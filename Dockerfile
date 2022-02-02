@@ -27,6 +27,12 @@ ADD entrypoint.sh /usr/bin/
 # Add default config
 ADD config.example /etc/onetime/config
 
+# Override routes, links and CSS to hide everthing not wanted
+ADD routes.example /var/lib/onetime/lib/onetime/app/web/routes
+ADD footer.mustache.example /var/lib/onetime/templates/web/footer.mustache
+ADD main_append.css /ect/onetime/
+RUN cat /ect/onetime/main_append.css >> /var/lib/onetime/public/web/css/main.css
+
 VOLUME /etc/onetime /var/run/redis
 
 EXPOSE 7143/tcp
