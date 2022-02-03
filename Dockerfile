@@ -24,14 +24,20 @@ RUN set -ex && \
 
 ADD entrypoint.sh /usr/bin/
 
-# Add default config
+# Add default OTP config
 ADD config.example /etc/onetime/config
 
-# Override routes, links and CSS to hide everthing not wanted
+# Override OTP routes and links
 ADD routes.example /var/lib/onetime/lib/onetime/app/web/routes
 ADD footer.mustache.example /var/lib/onetime/templates/web/footer.mustache
+
+# Append to OTP site CSS
 ADD main_append.css /ect/onetime/
 RUN cat /ect/onetime/main_append.css >> /var/lib/onetime/public/web/css/main.css
+
+# Append to Redis config
+ADD redis_append.conf /ect/onetime/
+RUN cat /ect/onetime/redis_append.conf >> /etc/redis/redis.conf
 
 VOLUME /etc/onetime /var/run/redis
 

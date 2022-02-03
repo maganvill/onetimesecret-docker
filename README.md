@@ -11,9 +11,12 @@ ONETIMESECRET_SECRET
 ```
 
 ## Minimal
-All features except create, view, delete secrets are disabled. 
+All features except create, view and delete secrets are disabled.
 
 This is achieved by 
 - using a subsets of the routes in ```routes.example```
 - custom stripped footer in ```footer.mustache.example``` 
 - CSS to hide the remaining links ```main_append.css```.
+
+## Redis
+Data is flushed to disk every seconds if there are new secrets created.
